@@ -1,0 +1,169 @@
+@property --translate-x {
+  syntax: '<length>';
+  initial-value: 100px;
+  inherits: false;
+}
+
+@property --translate-y {
+  syntax: '<length>';
+  initial-value: -100px;
+  inherits: false;
+}
+
+.wrapper {
+  transition: transform 1s ease-in-out;
+  position: relative;
+  width: 920px;
+  height: 596px;
+}
+
+.wrapper:hover {
+  transform: translateX(50px) translateY(80px) rotate(-30deg) skew(25deg) scale(.75);
+}
+
+.browser {
+  background-image: url("https://assets.codepen.io/89905/vt-1.png");
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+}
+
+.vt {
+  position: absolute;
+  inset: 0;
+  background: rgb(255 225 40 / 0.25);
+
+  display: grid;
+  place-content: center;
+
+  translate: 0 0;
+  color: transparent;
+
+  transition:
+    translate var(--duration) calc(var(--delay) * (4 - var(--i))),
+    outline var(--duration) calc(var(--delay) * (4 - var(--i))),
+    color var(--duration) calc(var(--delay) * (4 - var(--i)));
+
+  --duration: 0.25s;
+  --delay: 0s;
+  pointer-events: none;
+  outline: 1px solid transparent;
+  z-index: var(--i);
+}
+
+.vt::after {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  translate: calc(-100% - 10px) 0;
+  font-size: 48px;
+}
+
+.vt-overlay {
+  --i: 0;
+  inset: 91px 27px 37px 28px;
+  border-radius: 0 0 5px 5px;
+  background: rgb(225 40 255 / 0.25);
+}
+
+.vt-overlay::after {
+  content: '::view-transition';
+}
+
+.vt-group {
+  --i: 1;
+}
+
+.vt-group::after {
+  content: '::view-transition-group(' attr(data-name) ')';
+}
+
+.vt-image-pair {
+  --i: 2;
+}
+
+.vt-image-pair::after {
+  content: '::view-transition-image-pair(' attr(data-name) ')';
+}
+
+.vt-old {
+  --i: 3;
+  z-index: 4;
+}
+
+.vt-old::after {
+  content: '::view-transition-old(' attr(data-name) ')';
+}
+
+.vt-new {
+  --i: 3;
+}
+
+.vt-new::after {
+  content: '::view-transition-new(root)';
+}
+
+.vt-old,
+.vt-new {
+  background-image: url("https://assets.codepen.io/89905/vt-1.png");
+  background-size: 920px 596px;
+  background-position: -28px -91px;
+}
+
+.vt-new {
+  background-image: url("https://assets.codepen.io/89905/vt-2.png");
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.vt-image-pair {
+  isolation: isolate;
+}
+
+.vt-old {
+  animation: fade-out 2.5s linear infinite alternate;
+}
+
+.vt-new {
+  animation: fade-in 2.5s linear infinite alternate;
+}
+
+.wrapper:hover .vt {
+  translate: var(--translate-x, 100px) var(--translate-y, -100px);
+  color: black;
+  outline-color: black;
+
+  --duration: 2s;
+  --delay: 0.5s;
+  transition:
+    translate var(--duration) calc(var(--delay) * var(--i)),
+    outline var(--duration) calc(var(--delay) * var(--i)),
+    color var(--duration) calc(var(--delay) * var(--i));
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  place-content: end center;
+  padding-bottom: 10vh;
+  font-size: 16px;
+  text-align: center;
+}

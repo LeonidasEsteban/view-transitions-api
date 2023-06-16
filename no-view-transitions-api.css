@@ -1,0 +1,51 @@
+body {
+  min-block-size: 100vh;
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  display: grid;
+  place-content: center;
+  place-items: center;
+}
+
+.container {
+  position: relative;
+  inline-size: 100vw;
+
+  & h1 {
+    font-size: 50vmin;
+    text-align: center;
+    margin: 0;
+    line-height: 1;
+    position: absolute;
+    inset: 0;
+  }
+}
+
+
+.fade-in {
+  animation: fade-in 1s;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-out {
+  animation: fade-out 1s;
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

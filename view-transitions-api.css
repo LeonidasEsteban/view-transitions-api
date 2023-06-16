@@ -1,0 +1,63 @@
+@import "https://unpkg.com/open-props/easings.min.css";
+@import "https://unpkg.com/open-props/animations.min.css";
+
+body {
+  min-block-size: 100vh;
+  font-family: system-ui, sans-serif;
+  display: grid;
+  place-content: center;
+  place-items: center;
+}
+
+html {
+  color-scheme: dark light;
+}
+
+h1.container {
+  view-transition-name: fade;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+
+  ::view-transition-old(fade) {
+    animation:
+      var(--animation-fade-out),
+      var(--animation-scale-down);
+  }
+
+  ::view-transition-new(fade) {
+    animation:
+      var(--animation-fade-out) reverse,
+      var(--animation-slide-in-up);
+  }
+}
+
+
+h1.container {
+  inline-size: 100vw;
+  font-size: 30vmin;
+  text-align: center;
+  margin: 0;
+  view-transition-name: fade;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
